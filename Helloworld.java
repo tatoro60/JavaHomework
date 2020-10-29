@@ -8,6 +8,7 @@ public class Helloworld {
         float f = 45.87F;
         double d = 486.744D;
         char character = 'a';
+        int v = 19;
         String str = "Hello World";
 
         System.out.println(b);
