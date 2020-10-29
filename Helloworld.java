@@ -9,7 +9,7 @@ public class Helloworld {
         double d = 486.744D;
         char character = 'a';
         String str = "Hello World";
-
+        System.out.println(5);
         System.out.println(b);
         System.out.println(s);
         System.out.println(num);
