@@ -43,9 +43,9 @@ public class Lesson2 {
         }
         System.out.println(countOfEvenNumbers);
         System.out.println("Task 7 \nGiven an integer, 0< N < 21 , print its first 10 multiples.");
-        int N = 10;
+        int number = 10;
         for (int i = 1; i < 11; i++) {
-            System.out.println(N + " X " + i + " = " + N * i);
+            System.out.println(number + " X " + i + " = " + number * i);
         }
     }
 }
