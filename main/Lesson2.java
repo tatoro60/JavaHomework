@@ -1,3 +1,4 @@
+package main;
 public class Lesson2 {
     public static void main(String[] args) {
         System.out.println("Task 1 \nCreate an array and fill it with 2 number.");

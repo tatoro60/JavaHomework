@@ -1,3 +1,4 @@
+package main;
 public class Homework3 {
     static void bubbleSort(int[] array) {
         for (int i = 0; i < array.length; i++) {
