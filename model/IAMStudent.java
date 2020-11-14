@@ -1,4 +1,5 @@
 package model;
+
 public class IAMStudent {
     public String firstName;
     public String lastName;
