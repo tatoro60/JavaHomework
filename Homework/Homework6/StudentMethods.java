@@ -1,7 +1,5 @@
 package Homework.Homework6;
 
-import Homework.Homework6.model.Student;
-
 public interface StudentMethods {
     //Task 1: Print full names of students
     void printFullNames();
