@@ -1,4 +1,6 @@
-package model;
+package Homework.Homework7.model;
+
+import Homework.Homework7.model.Footballer;
 
 public class Midfielder extends Footballer {
     protected int assists;

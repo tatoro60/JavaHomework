@@ -1,12 +1,12 @@
-package model;
+package Homework.Homework7.model;
 
-public class Human {
+public  class Human {
     protected String firstName;
     protected String lastName;
     protected int year;
 
     public Human() {
-        firstName = "";
+        firstName = "babken";
         lastName = "";
         year = 1900;
     }
@@ -16,7 +16,8 @@ public class Human {
     }
 
     public void setFirstName(String firstName) {
-        if (firstName.length() > 0) {
+
+        if (firstName.matches("[A-Z][a-z]*")) {
             this.firstName = firstName;
         }
     }
@@ -26,7 +27,7 @@ public class Human {
     }
 
     public void setLastName(String lastName) {
-        if (lastName.length() > 0) {
+        if (firstName.matches("[A-Z][a-z]*")) {
             this.lastName = lastName;
         }
     }

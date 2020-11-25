@@ -1,4 +1,4 @@
-package model;
+package Homework.Homework7.model;
 
 public class Sportsman extends Human {
     protected boolean retired;
