@@ -1,22 +1,24 @@
 package Homework.Homework7.service;
 
 
+import Homework.Homework7.model.Defender;
+import Homework.Homework7.model.GoalKeeper;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
 public class GoalkeeperService implements GeneralStatistics, GoalkeeperStatistics {
 
     @Override
     public int appearanceScore(boolean appearance) {
-        if (appearance) {
-            return 1;
-        }
-        return 0;
+        return appearance ? 1 : 0;
     }
 
     @Override
     public int minutesPlayed60PlusScore(boolean minutesPlayed) {
-        if (minutesPlayed) {
-            return 2;
-        }
-        return 0;
+        return minutesPlayed ? 2 : 0;
     }
 
     @Override
@@ -31,10 +33,7 @@ public class GoalkeeperService implements GeneralStatistics, GoalkeeperStatistic
 
     @Override
     public int yellowCardScore(boolean yellowCard) {
-        if (yellowCard) {
-            return -1;
-        }
-        return 0;
+        return yellowCard ? -1 : 0;
     }
 
     @Override
@@ -49,10 +48,7 @@ public class GoalkeeperService implements GeneralStatistics, GoalkeeperStatistic
 
     @Override
     public int redCardScore(boolean redCard) {
-        if (redCard) {
-            return -3;
-        }
-        return 0;
+        return redCard ? -3 : 0;
     }
 
     @Override
@@ -62,10 +58,7 @@ public class GoalkeeperService implements GeneralStatistics, GoalkeeperStatistic
 
     @Override
     public int cleanSheetScore(boolean cleanSheet) {
-        if (cleanSheet) {
-            return 4;
-        }
-        return 0;
+        return cleanSheet ? 4 : 0;
     }
 
     @Override
@@ -75,11 +68,32 @@ public class GoalkeeperService implements GeneralStatistics, GoalkeeperStatistic
 
     @Override
     public int penaltyKickSavesScore(int penaltyKickSaves) {
-        return penaltyKickSaves*5;
+        return penaltyKickSaves * 5;
     }
 
     @Override
     public int savesScore(int saves) {
-        return saves/3;
+        return saves / 3;
+    }
+
+    public void writeToFile(String path, GoalKeeper goalKeeper) throws IOException {
+        Files.write(Paths.get(path), (goalKeeper.getFirstName() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.getLastName() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.isAppeared() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.isMinutesPlayed60Plus() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.getGoals() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.getAssists() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.getPenaltiesEarned() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.hasYellowCard() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.hasRedCard() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.getPenaltiesConceded() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.getOwnGoal() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.isCleanSheet() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.getPenaltyKickSaves() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.getSaves() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.getConcededGoals() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.getFantasyScore() + "").getBytes(), StandardOpenOption.APPEND);
     }
 }
+
+

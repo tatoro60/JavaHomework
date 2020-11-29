@@ -1,22 +1,24 @@
 package Homework.Homework7.service;
 
 
+import Homework.Homework7.model.Defender;
+import Homework.Homework7.model.GoalKeeper;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
 public class DefenderService implements GeneralStatistics {
 
     @Override
     public int appearanceScore(boolean appearance) {
-        if (appearance) {
-            return 1;
-        }
-        return 0;
+        return appearance ? 1 : 0;
     }
 
     @Override
     public int minutesPlayed60PlusScore(boolean minutesPlayed) {
-        if (minutesPlayed) {
-            return 2;
-        }
-        return 0;
+        return minutesPlayed ? 2 : 0;
     }
 
     @Override
@@ -31,10 +33,7 @@ public class DefenderService implements GeneralStatistics {
 
     @Override
     public int yellowCardScore(boolean yellowCard) {
-        if (yellowCard) {
-            return -1;
-        }
-        return 0;
+        return yellowCard ? -1 : 0;
     }
 
     @Override
@@ -49,10 +48,7 @@ public class DefenderService implements GeneralStatistics {
 
     @Override
     public int redCardScore(boolean redCard) {
-        if (redCard) {
-            return -3;
-        }
-        return 0;
+        return redCard ? -3 : 0;
     }
 
     @Override
@@ -60,12 +56,23 @@ public class DefenderService implements GeneralStatistics {
         return penaltiesEarned * 2;
     }
 
-
     public int cleanSheetScore(boolean cleanSheet) {
-        if (cleanSheet) {
-            return 4;
-        }
-        return 0;
+        return cleanSheet?4:0;
     }
 
+    public void writeToFile(String path, Defender defender) throws IOException {
+        Files.write(Paths.get(path), (defender.getFirstName() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (defender.getLastName() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (defender.isAppeared() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (defender.isMinutesPlayed60Plus() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (defender.getGoals() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (defender.getAssists() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (defender.getPenaltiesEarned() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (defender.hasYellowCard() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (defender.hasRedCard() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (defender.getPenaltiesConceded() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (defender.getOwnGoal() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (defender.isCleanSheet() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (defender.getFantasyScore() + "").getBytes(), StandardOpenOption.APPEND);
+    }
 }
