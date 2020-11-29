@@ -16,7 +16,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
 public class CreateFantasyTeam {
-    private String path ;
+    private String path = "";
 
     public void removeFileInfo() throws IOException {
         System.out.println("What file info do you want remove?");
@@ -52,18 +52,8 @@ public class CreateFantasyTeam {
                 selectTactics(3, 5, 2);
                 break;
         }
-        System.out.println("Do you want sort by fantasy score?");
-        System.out.println("1.yes by descending order");
-        System.out.println("2.yes by ascending order");
-        System.out.println("If you don't want type any other number");
-        switch (s.nextInt()) {
-            case 1:
-                sortFootballersByFantasyScore(true);
-                break;
-            case 2:
-                sortFootballersByFantasyScore(false);
-                break;
-        }
+        sortFootballersByFantasyScore();
+
 
     }
 
@@ -94,7 +84,6 @@ public class CreateFantasyTeam {
         path = s.nextLine();
         File file = new File(path);
         if (file.createNewFile()) {
-            this.path = path;
             System.out.println(path + " File Created");
         } else System.out.println("File " + path + " already exists");
     }
@@ -214,7 +203,7 @@ public class CreateFantasyTeam {
                 goalKeeper.setFantasyScore(goalkeeperService.redCardScore(goalKeeper.hasRedCard()));
                 goalKeeper.setFantasyScore(goalkeeperService.penaltiesConcededScore(goalKeeper.getPenaltiesConceded()));
                 goalKeeper.setFantasyScore(goalkeeperService.ownGoalsScore(goalKeeper.getOwnGoal()));
-                goalKeeper.setFantasyScore(goalkeeperService.cleanSheetScore(goalKeeper.isCleanSheet()));
+                goalKeeper.setFantasyScore(goalkeeperService.cleanSheetScore(goalKeeper.wasCleanSheet()));
                 goalKeeper.setFantasyScore(goalkeeperService.penaltyKickSavesScore(goalKeeper.getPenaltyKickSaves()));
                 goalKeeper.setFantasyScore(goalkeeperService.savesScore(goalKeeper.getSaves()));
                 goalKeeper.setFantasyScore(goalkeeperService.concededGoalsScore(goalKeeper.getConcededGoals()));
@@ -268,7 +257,12 @@ public class CreateFantasyTeam {
         }
     }
 
-    public void sortFootballersByFantasyScore(boolean descending) throws IOException {
+    public void sortFootballersByFantasyScore() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        if (path.isEmpty()) {
+            System.out.println("Enter path");
+            path = scanner.nextLine();
+        }
         BufferedReader br = new BufferedReader(new FileReader(new File(path)));
         String[] footballersInfo = new String[11];
         String st;
@@ -276,17 +270,29 @@ public class CreateFantasyTeam {
         while ((st = br.readLine()) != null) {
             footballersInfo[i++] = st;
         }
-
-        if (descending) {
-            descendingOrderBubbleSort(footballersInfo);
-        } else {
-            ascendingOrderBubbleSort(footballersInfo);
+        boolean a = true;
+        while (a) {
+            System.out.println("Do you want print sorted by fantasy score?");
+            System.out.println("1.yes by descending order");
+            System.out.println("2.yes by ascending order");
+            System.out.println("3.Print footballers info and end program");
+            System.out.println("Type any other number print footballers info and end program");
+            switch (scanner.nextInt()) {
+                case 1:
+                    descendingOrderBubbleSort(footballersInfo);
+                    break;
+                case 2:
+                    ascendingOrderBubbleSort(footballersInfo);
+                    break;
+                case 3:
+                    a = false;
+                    break;
+            }
+            for (String s : footballersInfo) {
+                System.out.println(s);
+            }
+            System.out.println("------------------------------");
         }
-        Files.write(Paths.get(path), "".getBytes());
-        for (String s : footballersInfo) {
-            Files.write(Paths.get(path), (s + "\n").getBytes(), StandardOpenOption.APPEND);
-        }
-
     }
 
     public void ascendingOrderBubbleSort(String[] a) {

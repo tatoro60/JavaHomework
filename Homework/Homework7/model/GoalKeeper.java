@@ -1,6 +1,5 @@
 package Homework.Homework7.model;
 
-import Homework.Homework7.service.GoalkeeperService;
 
 public class GoalKeeper extends Footballer  {
     private boolean cleanSheet ;
@@ -10,7 +9,7 @@ public class GoalKeeper extends Footballer  {
     public  GoalKeeper(){
         cleanSheet =true;
     }
-    public boolean isCleanSheet() {
+    public boolean wasCleanSheet() {
         return cleanSheet;
     }
 

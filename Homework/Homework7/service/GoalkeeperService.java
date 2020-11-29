@@ -1,7 +1,6 @@
 package Homework.Homework7.service;
 
 
-import Homework.Homework7.model.Defender;
 import Homework.Homework7.model.GoalKeeper;
 
 import java.io.IOException;
@@ -88,7 +87,7 @@ public class GoalkeeperService implements GeneralStatistics, GoalkeeperStatistic
         Files.write(Paths.get(path), (goalKeeper.hasRedCard() + " ").getBytes(), StandardOpenOption.APPEND);
         Files.write(Paths.get(path), (goalKeeper.getPenaltiesConceded() + " ").getBytes(), StandardOpenOption.APPEND);
         Files.write(Paths.get(path), (goalKeeper.getOwnGoal() + " ").getBytes(), StandardOpenOption.APPEND);
-        Files.write(Paths.get(path), (goalKeeper.isCleanSheet() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (goalKeeper.wasCleanSheet() + " ").getBytes(), StandardOpenOption.APPEND);
         Files.write(Paths.get(path), (goalKeeper.getPenaltyKickSaves() + " ").getBytes(), StandardOpenOption.APPEND);
         Files.write(Paths.get(path), (goalKeeper.getSaves() + " ").getBytes(), StandardOpenOption.APPEND);
         Files.write(Paths.get(path), (goalKeeper.getConcededGoals() + " ").getBytes(), StandardOpenOption.APPEND);

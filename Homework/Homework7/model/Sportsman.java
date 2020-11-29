@@ -1,29 +1,33 @@
 package Homework.Homework7.model;
 
-public class Sportsman extends Human {
-    protected boolean retired;
-    protected String nationality;
+public  abstract class Sportsman {
+    protected String firstName;
+    protected String lastName;
 
     public Sportsman() {
-        retired = false;
-        nationality = "";
+        firstName = "Sasha";
+        lastName = "Tsatryan";
     }
 
-    public boolean wasRetired() {
-        return retired;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setRetired(boolean retired) {
-        this.retired = retired;
-    }
+    public void setFirstName(String firstName) {
 
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        if (nationality.length() > 0) {
-            this.nationality = nationality;
+        if (firstName.matches("[A-Z][a-z]+")) {
+            this.firstName = firstName;
         }
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        if (firstName.matches("[A-Z][a-z]+")) {
+            this.lastName = lastName;
+        }
+    }
+
 }
