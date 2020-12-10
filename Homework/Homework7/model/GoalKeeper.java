@@ -1,19 +1,23 @@
 package Homework.Homework7.model;
 
 
-public class GoalKeeper extends Footballer  {
-    private boolean cleanSheet ;
+import Homework.Homework7.service.GoalkeeperService;
+
+import java.util.StringJoiner;
+
+public class GoalKeeper extends Footballer {
+    private boolean cleanSheet;
     private int penaltyKickSaves;
     private int concededGoals;
     private int saves;
-    public  GoalKeeper(){
-        cleanSheet =true;
-    }
+
+
     public boolean wasCleanSheet() {
         return cleanSheet;
     }
 
     public void setCleanSheet(boolean cleanSheet) {
+        fantasyScore += cleanSheet ? 4 : 0;
         this.cleanSheet = cleanSheet;
     }
 
@@ -22,6 +26,7 @@ public class GoalKeeper extends Footballer  {
     }
 
     public void setPenaltyKickSaves(int penaltyKickSaves) {
+        fantasyScore += penaltyKickSaves * 5;
         this.penaltyKickSaves = penaltyKickSaves;
     }
 
@@ -30,6 +35,7 @@ public class GoalKeeper extends Footballer  {
     }
 
     public void setConcededGoals(int concededGoals) {
+        fantasyScore -= concededGoals/2;
         this.concededGoals = concededGoals;
     }
 
@@ -38,8 +44,55 @@ public class GoalKeeper extends Footballer  {
     }
 
     public void setSaves(int saves) {
+        fantasyScore += saves/3;
         this.saves = saves;
     }
-    
+
+
+    public static Footballer goalkeeperInfoToObject(String goalkeeper) {
+        String[] s = goalkeeper.split(" ");
+        GoalKeeper currentGoalkeeper = new GoalKeeper();
+        currentGoalkeeper.setFirstName(s[1]);
+        currentGoalkeeper.setLastName(s[2]);
+        currentGoalkeeper.setAppeared(Boolean.parseBoolean(s[3]));
+        currentGoalkeeper.setMinutesPlayed60Plus(Boolean.parseBoolean(s[4]));
+        currentGoalkeeper.setGoals(Integer.parseInt(s[5]));
+        currentGoalkeeper.setAssists(Integer.parseInt(s[6]));
+        currentGoalkeeper.setPenaltiesEarned(Integer.parseInt(s[7]));
+        currentGoalkeeper.setYellowCards(Boolean.parseBoolean(s[8]));
+        currentGoalkeeper.setRedCard(Boolean.parseBoolean(s[9]));
+        currentGoalkeeper.setPenaltiesConceded(Integer.parseInt(s[10]));
+        currentGoalkeeper.setOwnGoal(Integer.parseInt(s[11]));
+        currentGoalkeeper.setCleanSheet(Boolean.parseBoolean(s[12]));
+        currentGoalkeeper.setPenaltyKickSaves(Integer.parseInt(s[13]));
+        currentGoalkeeper.setSaves(Integer.parseInt(s[14]));
+        currentGoalkeeper.setConcededGoals(Integer.parseInt(s[15]));
+        return currentGoalkeeper;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[").append(getFantasyScore()).append("]");
+        StringJoiner stringJoiner = new StringJoiner(",", "[", "]");
+        stringJoiner.add("GK");
+        stringJoiner.add(getFirstName());
+        stringJoiner.add(getLastName());
+        stringJoiner.add(isAppeared() + "");
+        stringJoiner.add(isMinutesPlayed60Plus() + "");
+        stringJoiner.add(getGoals() + "");
+        stringJoiner.add(getAssists() + "");
+        stringJoiner.add(getPenaltiesEarned() + "");
+        stringJoiner.add(hasYellowCard() + "");
+        stringJoiner.add(hasRedCard() + "");
+        stringJoiner.add(getPenaltiesConceded() + "");
+        stringJoiner.add(getOwnGoal() + "");
+        stringJoiner.add(wasCleanSheet() + "");
+        stringJoiner.add(getPenaltyKickSaves() + "");
+        stringJoiner.add(getSaves() + "");
+        stringJoiner.add(getConcededGoals() + "");
+        stringBuilder.append(stringJoiner.toString());
+        return stringBuilder.toString();
+    }
 
 }
