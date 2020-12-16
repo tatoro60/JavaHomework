@@ -12,11 +12,7 @@ public class Homework14 {
             char current = s.charAt(i);
             if (isParentheses(current)) {
                 if (!stack.isEmpty()) {
-                    if (current == ')' && stack.peek() == '(') {
-                        stack.pop();
-                    } else if (current == '}' && stack.peek() == '{') {
-                        stack.pop();
-                    } else if (current == ']' && stack.peek() == '[') {
+                    if ((current == ')' && stack.peek() == '(') || (current == '}' && stack.peek() == '{') || (current == ']' && stack.peek() == '[')) {
                         stack.pop();
                     } else {
                         stack.push(current);
