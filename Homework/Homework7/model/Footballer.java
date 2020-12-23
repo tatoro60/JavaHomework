@@ -1,8 +1,11 @@
 package Homework.Homework7.model;
 
-import java.util.StringJoiner;
+import java.io.IOException;
+import java.util.Objects;
 
 public class Footballer extends Sportsman implements Comparable<Footballer> {
+    protected String firstName;
+    protected String lastName;
     protected boolean appeared;
     protected boolean minutesPlayed60Plus;
     protected int goals;
@@ -13,6 +16,36 @@ public class Footballer extends Sportsman implements Comparable<Footballer> {
     protected boolean redCard;
     protected int penaltiesEarned;
     public int fantasyScore;
+
+    public Footballer(String firstName,String lastName,int fantasyScore){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fantasyScore = fantasyScore;
+    }
+
+    public Footballer() {
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+
+        if (firstName.matches("[A-Z][a-z]+")) {
+            this.firstName = firstName;
+        }
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        if (firstName.matches("[A-Z][a-z]+")) {
+            this.lastName = lastName;
+        }
+    }
 
     public boolean isAppeared() {
         return appeared;
@@ -142,5 +175,21 @@ public class Footballer extends Sportsman implements Comparable<Footballer> {
         }
     }
 
+    public void writeToFile(String path) throws IOException {
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Footballer that = (Footballer) o;
+        return firstName.equals(that.firstName) &&
+                lastName.equals(that.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName);
+    }
 }

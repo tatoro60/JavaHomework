@@ -1,8 +1,10 @@
 package Homework.Homework7.model;
 
 
-import Homework.Homework7.service.GoalkeeperService;
-
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.StringJoiner;
 
 public class GoalKeeper extends Footballer {
@@ -11,6 +13,12 @@ public class GoalKeeper extends Footballer {
     private int concededGoals;
     private int saves;
 
+    public GoalKeeper(String firstName,String lastName,int fantasyScore) {
+        super(firstName,lastName,fantasyScore);
+    }
+    public GoalKeeper(){
+
+    }
 
     public boolean wasCleanSheet() {
         return cleanSheet;
@@ -35,7 +43,7 @@ public class GoalKeeper extends Footballer {
     }
 
     public void setConcededGoals(int concededGoals) {
-        fantasyScore -= concededGoals/2;
+        fantasyScore -= concededGoals / 2;
         this.concededGoals = concededGoals;
     }
 
@@ -44,7 +52,7 @@ public class GoalKeeper extends Footballer {
     }
 
     public void setSaves(int saves) {
-        fantasyScore += saves/3;
+        fantasyScore += saves / 3;
         this.saves = saves;
     }
 
@@ -95,4 +103,22 @@ public class GoalKeeper extends Footballer {
         return stringBuilder.toString();
     }
 
+    public void writeToFile(String path) throws IOException {
+        Files.write(Paths.get(path), (getFirstName() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getLastName() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (isAppeared() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (isMinutesPlayed60Plus() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getGoals() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getAssists() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getPenaltiesEarned() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (hasYellowCard() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (hasRedCard() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getPenaltiesConceded() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getOwnGoal() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (wasCleanSheet() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getPenaltyKickSaves() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getSaves() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getConcededGoals() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getFantasyScore() + "").getBytes(), StandardOpenOption.APPEND);
+    }
 }

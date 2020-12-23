@@ -1,8 +1,18 @@
 package Homework.Homework7.model;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.StringJoiner;
 
 public class Forward extends Footballer {
+    public Forward(String firstName,String lastName,int fantasyScore) {
+        super(firstName,lastName,fantasyScore);
+    }
+    public Forward() {
+
+    }
     public static Footballer forwardInfoToObject(String forward){
         String[] s = forward.split(" ");
         Forward currentForward = new Forward();
@@ -38,5 +48,19 @@ public class Forward extends Footballer {
         stringJoiner.add(getOwnGoal()+"");
         stringBuilder.append(stringJoiner.toString());
         return stringBuilder.toString();
+    }
+    public void writeToFile(String path) throws IOException {
+        Files.write(Paths.get(path), (getFirstName() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getLastName() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (isAppeared() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (isMinutesPlayed60Plus() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getGoals() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getAssists() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getPenaltiesEarned() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (hasYellowCard() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (hasRedCard() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getPenaltiesConceded() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getOwnGoal() + " ").getBytes(), StandardOpenOption.APPEND);
+        Files.write(Paths.get(path), (getFantasyScore() + "").getBytes(), StandardOpenOption.APPEND);
     }
 }

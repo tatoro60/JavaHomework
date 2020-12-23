@@ -22,11 +22,6 @@ public class GoalkeeperService {
         Files.write(Paths.get(path), (goalKeeper.hasRedCard() + " ").getBytes(), StandardOpenOption.APPEND);
         Files.write(Paths.get(path), (goalKeeper.getPenaltiesConceded() + " ").getBytes(), StandardOpenOption.APPEND);
         Files.write(Paths.get(path), (goalKeeper.getOwnGoal() + " ").getBytes(), StandardOpenOption.APPEND);
-        Files.write(Paths.get(path), (goalKeeper.wasCleanSheet() + " ").getBytes(), StandardOpenOption.APPEND);
-        Files.write(Paths.get(path), (goalKeeper.getPenaltyKickSaves() + " ").getBytes(), StandardOpenOption.APPEND);
-        Files.write(Paths.get(path), (goalKeeper.getSaves() + " ").getBytes(), StandardOpenOption.APPEND);
-        Files.write(Paths.get(path), (goalKeeper.getConcededGoals() + " ").getBytes(), StandardOpenOption.APPEND);
-        Files.write(Paths.get(path), (goalKeeper.getFantasyScore() + "").getBytes(), StandardOpenOption.APPEND);
     }
 }
 

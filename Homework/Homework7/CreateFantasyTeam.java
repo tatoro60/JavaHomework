@@ -1,10 +1,7 @@
 package Homework.Homework7;
 
 import Homework.Homework7.model.*;
-import Homework.Homework7.service.DefenderService;
-import Homework.Homework7.service.ForwardService;
 import Homework.Homework7.service.GoalkeeperService;
-import Homework.Homework7.service.MidfielderService;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,8 +24,9 @@ public class CreateFantasyTeam {
     }
 
     public void start() throws IOException {
-        creteFile();
         Scanner s = new Scanner(System.in);
+        path = s.nextLine();
+        creteFile(path);
         System.out.println("Select tactics");
         System.out.println("1. 4-3-3");
         System.out.println("2. 4-4-2");
@@ -79,14 +77,9 @@ public class CreateFantasyTeam {
         }
     }
 
-    public void creteFile() throws IOException {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Enter path");
-        path = s.nextLine();
+    public static void creteFile(String path) throws IOException {
         File file = new File(path);
-        if (file.createNewFile()) {
-            System.out.println(path + " File Created");
-        } else System.out.println("File " + path + " already exists");
+        file.createNewFile();
     }
 
     private void fillFootballerInfo(Footballer footballer) throws IOException {
@@ -163,27 +156,7 @@ public class CreateFantasyTeam {
     }
 
     private void writeToFile(Footballer footballer) throws IOException {
-        if (footballer instanceof GoalKeeper) {
-            GoalKeeper gk = (GoalKeeper) footballer;
-            GoalkeeperService goalkeeperService = new GoalkeeperService();
-            goalkeeperService.writeToFile(path, gk);
-        } else {
-            if (footballer instanceof Defender) {
-                Defender df = (Defender) footballer;
-                DefenderService defenderService = new DefenderService();
-                defenderService.writeToFile(path, df);
-            } else {
-                if (footballer instanceof Midfielder) {
-                    Midfielder mid = (Midfielder) footballer;
-                    MidfielderService midfielderService = new MidfielderService();
-                    midfielderService.writeToFile(path, mid);
-                } else {
-                    Forward forward = (Forward) footballer;
-                    ForwardService forwardService = new ForwardService();
-                    forwardService.writeToFile(path, forward);
-                }
-            }
-        }
+        footballer.writeToFile(path);
     }
 
     public void sortFootballersByFantasyScore() throws IOException {
