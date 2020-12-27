@@ -1,14 +1,14 @@
-package Homework.Homework7.log;
+package Homework.Homework7.service;
 
-import Homework.Homework7.User;
+import Homework.Homework7.model.User;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Validator {
+public class ValidationService {
     public static boolean nameValidator(String name) {
-        return name.matches("[A-Z][a-z]*");
+        return name.matches("[A-Z][a-z]+");
     }
 
     public static boolean usernameValidator(String username, HashMap<String, User> usernames) {

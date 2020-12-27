@@ -1,30 +1,40 @@
-package Homework.Homework7;
+package Homework.Homework7.model;
 
-import Homework.Homework7.model.Footballer;
+import Homework.Homework7.data.FootballersData;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
 public class User {
-    public String name;
-    public String surname;
-    public String username;
-    public String email;
-    public String password;
+    private String name;
+    private String surname;
+    private String username;
+    private String email;
+    private String password;
+    private int sumOfFantasyScore;
     private static final String ADMIN_PATH = FootballersData.footballersPath;
-    private static HashSet<Footballer> allFootballers = FootballersData.allFootballers;
+    private static HashMap<Integer, Footballer> allFootballers = FootballersData.allFootballers;
     private String userPath;
-    private LinkedHashSet<Footballer> myTeam = new LinkedHashSet<>();
 
     public User(String username){
         this.username = username;
     }
+
     public User(){
 
     }
+
+    public User(String name, String surname, String username, String email, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     public String getName() {
         return name;
     }
@@ -65,7 +75,7 @@ public class User {
         this.password = password;
     }
 
-    /*private boolean setNickName(String nickName) {
+    private boolean setNickName(String nickName) {
         String USERNAME_PATTERN = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$";
         if (nickName.matches(USERNAME_PATTERN)) {
             StringBuilder sb = new StringBuilder();
@@ -84,15 +94,12 @@ public class User {
             System.out.println("Your nickname is invalid! Please type correct nickname");
             return false;
         }
-    }*/
+    }
 
 
     public void chooseFootballers() throws IOException {
         if(allFootballers.isEmpty()){
             FootballersData.readDataFromFile();
-        }
-        for (Footballer footballer : allFootballers) {
-            System.out.println(footballer);
         }
     }
 

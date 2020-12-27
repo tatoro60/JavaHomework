@@ -1,10 +1,12 @@
-package Homework.Homework7.log;
+package Homework.Homework7.service;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Scanner;
 
 public class Helper {
+    public static final Scanner scanner = new Scanner(System.in);
     public static String getMd5(String input) {
         try {
 

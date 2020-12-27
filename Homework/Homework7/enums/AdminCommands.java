@@ -1,9 +1,10 @@
-package Homework.Homework7.log;
+package Homework.Homework7.enums;
 
-public enum Command {
-    LOGIN("login"),SIGNUP("signup"),EXIT("exit");
+public enum AdminCommands {
+    ADD("add"), SAVE("save"), REMOVE("remove"),SHOW("show"),EXIT("exit");
     private String command;
-    Command(String cmd){
+
+    AdminCommands(String cmd) {
         this.command = cmd;
     }
 
@@ -14,8 +15,9 @@ public enum Command {
     public void setCommand(String command) {
         this.command = command;
     }
-    public static Command fromString(String orderName) {
-        for (Command cmd : Command.values()) {
+
+    public static AdminCommands fromString(String orderName) {
+        for (AdminCommands cmd : AdminCommands.values()) {
             if (cmd.getCommand().equalsIgnoreCase(orderName)) {
                 return cmd;
             }

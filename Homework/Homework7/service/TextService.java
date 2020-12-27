@@ -1,6 +1,6 @@
-package Homework.Homework7.log;
+package Homework.Homework7.service;
 
-import Homework.Homework7.User;
+import Homework.Homework7.model.User;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,16 +15,14 @@ public class TextService {
         List<String> strings = Files.readAllLines(Path.of(path));
         for (String string : strings) {
             String[] info = string.split(" ");
-            User currentUser = new User();
-            currentUser.setName(info[0]);
-            currentUser.setSurname(info[1]);
-            currentUser.setUsername(info[2]);
-            currentUser.setEmail(info[3]);
-            currentUser.setPassword(info[4]);
+            User currentUser = new User(info[0],info[1],info[2],info[3],info[4]);
             map.put(currentUser.getUsername(),currentUser);
         }
     }
     public static void writeToFile(String path,String info) throws IOException {
         Files.write(Paths.get(path), (info+ "\n").getBytes(), StandardOpenOption.APPEND);
+    }
+    public static void removeFileInfo(String path) throws IOException {
+        Files.write(Paths.get(path), ("").getBytes());
     }
 }

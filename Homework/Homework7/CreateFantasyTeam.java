@@ -1,9 +1,8 @@
+/*
 package Homework.Homework7;
 
 import Homework.Homework7.model.*;
-import Homework.Homework7.service.GoalkeeperService;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -26,7 +25,6 @@ public class CreateFantasyTeam {
     public void start() throws IOException {
         Scanner s = new Scanner(System.in);
         path = s.nextLine();
-        creteFile(path);
         System.out.println("Select tactics");
         System.out.println("1. 4-3-3");
         System.out.println("2. 4-4-2");
@@ -77,10 +75,7 @@ public class CreateFantasyTeam {
         }
     }
 
-    public static void creteFile(String path) throws IOException {
-        File file = new File(path);
-        file.createNewFile();
-    }
+
 
     private void fillFootballerInfo(Footballer footballer) throws IOException {
         Scanner s = new Scanner(System.in);
@@ -155,9 +150,6 @@ public class CreateFantasyTeam {
         }
     }
 
-    private void writeToFile(Footballer footballer) throws IOException {
-        footballer.writeToFile(path);
-    }
 
     public void sortFootballersByFantasyScore() throws IOException {
         Scanner scanner = new Scanner(System.in);
@@ -194,3 +186,4 @@ public class CreateFantasyTeam {
     }
 
 }
+*/

@@ -1,21 +1,20 @@
 package Homework.Homework7.log;
 
-import Homework.Homework7.User;
+import Homework.Homework7.enums.Command;
+import Homework.Homework7.model.User;
+import Homework.Homework7.service.Helper;
+import Homework.Homework7.service.TextService;
+import Homework.Homework7.service.ValidationService;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
-import java.util.Scanner;
 
-public class Registration_Project {
-    private static final Scanner s = new Scanner(System.in);
-    private static final String path = "C:\\Users\\Admin\\Desktop\\database.txt";
-    public static HashMap<String, User> usernames;
+public class Registration {
+    private static final String path = "C:\\Users\\Admin\\Desktop\\Javafolder\\JavaHomework\\Homework\\Homework7\\data\\database.txt";
+    private static HashMap<String, User> usernames;
     private static User currentUser = null;
 
-    public Registration_Project() {
+    public Registration() {
         usernames = new HashMap<>();
         try {
             TextService.fillUsernamesMap(usernames, path);
@@ -29,7 +28,7 @@ public class Registration_Project {
         while (pointer) {
             System.out.println("Type your command");
             System.out.println("LOGIN   SIGNUP   EXIT");
-            Command cmd = Command.fromString(s.next());
+            Command cmd = Command.fromString(Helper.scanner.next());
             if (cmd != null) {
                 switch (cmd) {
                     case SIGNUP:
@@ -50,65 +49,65 @@ public class Registration_Project {
         currentUser = new User();
         String current;
         System.out.println("Please write your name");
-        current = s.next();
-        while (!Validator.nameValidator(current)) {
+        current = Helper.scanner.next();
+        while (!ValidationService.nameValidator(current)) {
             System.out.println("Your name is not valid please write again!");
-            current = s.next();
+            current = Helper.scanner.next();
         }
         currentUser.setName(current);
         System.out.println("Please write your surname");
-        current = s.next();
-        while (!Validator.nameValidator(current)) {
+        current = Helper.scanner.next();
+        while (!ValidationService.nameValidator(current)) {
             System.out.println("Your surname is not valid please write again!");
-            current = s.next();
+            current = Helper.scanner.next();
         }
         currentUser.setSurname(current);
         System.out.println("Please write your username");
-        current = s.next();
-        while (!Validator.usernameValidator(current, usernames)) {
+        current = Helper.scanner.next();
+        while (!ValidationService.usernameValidator(current, usernames)) {
             if (current.length() <= 10) {
                 System.out.println("Username length must be longer than 10");
             } else {
                 System.out.println("Username already exists. Write new username");
             }
-            current = s.next();
+            current = Helper.scanner.next();
         }
         currentUser.setUsername(current);
         System.out.println("Please write your email");
-        current = s.next();
-        while (!Validator.emailValidator(current)) {
+        current = Helper.scanner.next();
+        while (!ValidationService.emailValidator(current)) {
             System.out.println("Email validation is wrong .Write right email");
-            current = s.next();
+            current = Helper.scanner.next();
         }
         currentUser.setEmail(current);
         System.out.println("Please write your password");
-        current = s.next();
-        while (!(Validator.passwordValidator(current) && current.length() > 8)) {
+        current = Helper.scanner.next();
+        while (!(ValidationService.passwordValidator(current) && current.length() > 8)) {
             if (current.length() <= 8) {
                 System.out.println("Your password length must be longer than 8");
             } else {
                 System.out.println("Your password must have at least 3 digits and 2 Uppercases");
             }
-            current = s.next();
+            current = Helper.scanner.next();
         }
         currentUser.setPassword(Helper.getMd5(current));
         usernames.put(currentUser.getUsername(), currentUser);
-        TextService.writeToFile(path,currentUser.toString());
+        TextService.writeToFile(path, currentUser.toString());
     }
 
     private void login() {
         System.out.println("Write username");
-        String username = s.next();
+        String username = Helper.scanner.next();
         while (!usernames.containsKey(username)) {
             System.out.println("Username doesn't exist");
-            username = s.next();
+            username = Helper.scanner.next();
         }
         currentUser = usernames.get(username);
         System.out.println("Write your password");
-        String pass = s.next();
+        String pass = Helper.scanner.next();
         while (!(Helper.getMd5(pass).equals(currentUser.getPassword()))) {
             System.out.println("Password is wrong.Please write again!");
-            pass = s.next();
+            pass = Helper.scanner.next();
         }
 
     }
