@@ -1,10 +1,10 @@
 package Homework.Homework7.enums;
 
-public enum AdminCommands {
-    ADD("add"), SAVE("save"), REMOVE("remove"),SHOW("show"),EXIT("exit");
+public enum FootballerCommands {
+    ADD("add"), REMOVE("remove"),SHOWALL("showall"),EXIT("exit"),SHOWMY("showmy");
     private String command;
 
-    AdminCommands(String cmd) {
+    FootballerCommands(String cmd) {
         this.command = cmd;
     }
 
@@ -16,8 +16,8 @@ public enum AdminCommands {
         this.command = command;
     }
 
-    public static AdminCommands fromString(String orderName) {
-        for (AdminCommands cmd : AdminCommands.values()) {
+    public static FootballerCommands fromString(String orderName) {
+        for (FootballerCommands cmd : FootballerCommands.values()) {
             if (cmd.getCommand().equalsIgnoreCase(orderName)) {
                 return cmd;
             }

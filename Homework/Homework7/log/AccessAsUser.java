@@ -1,46 +1,43 @@
 package Homework.Homework7.log;
 
-import Homework.Homework7.enums.Command;
+import Homework.Homework7.data.FootballersData;
+import Homework.Homework7.data.UsersData;
+import Homework.Homework7.enums.AccessCommands;
 import Homework.Homework7.model.User;
 import Homework.Homework7.service.Helper;
 import Homework.Homework7.service.TextService;
+import Homework.Homework7.service.UserService;
 import Homework.Homework7.service.ValidationService;
 
 import java.io.IOException;
-import java.util.HashMap;
 
-public class Registration {
-    private static final String path = "C:\\Users\\Admin\\Desktop\\Javafolder\\JavaHomework\\Homework\\Homework7\\data\\database.txt";
-    private static HashMap<String, User> usernames;
-    private static User currentUser = null;
+public class AccessAsUser {
+    public static User currentUser = null;
 
-    public Registration() {
-        usernames = new HashMap<>();
-        try {
-            TextService.fillUsernamesMap(usernames, path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public AccessAsUser() {
+
     }
 
     public void begin() throws IOException {
-        boolean pointer = true;
-        while (pointer) {
+        while (true) {
             System.out.println("Type your command");
             System.out.println("LOGIN   SIGNUP   EXIT");
-            Command cmd = Command.fromString(Helper.scanner.next());
+            AccessCommands cmd = AccessCommands.fromString(Helper.scanner.next());
             if (cmd != null) {
                 switch (cmd) {
                     case SIGNUP:
                         signUp();
                         break;
                     case LOGIN:
-                        login();
+                        if (!login()) {
+                            continue;
+                        }
                         break;
                     case EXIT:
-                        pointer = false;
-                        break;
+                        return;
                 }
+                FootballersData.readDataFromFile();
+                new UserService(currentUser).workWithUser();
             }
         }
     }
@@ -64,7 +61,7 @@ public class Registration {
         currentUser.setSurname(current);
         System.out.println("Please write your username");
         current = Helper.scanner.next();
-        while (!ValidationService.usernameValidator(current, usernames)) {
+        while (!ValidationService.usernameValidator(current, UsersData.usernames)) {
             if (current.length() <= 10) {
                 System.out.println("Username length must be longer than 10");
             } else {
@@ -73,6 +70,7 @@ public class Registration {
             current = Helper.scanner.next();
         }
         currentUser.setUsername(current);
+        currentUser.makeLink();
         System.out.println("Please write your email");
         current = Helper.scanner.next();
         while (!ValidationService.emailValidator(current)) {
@@ -91,24 +89,28 @@ public class Registration {
             current = Helper.scanner.next();
         }
         currentUser.setPassword(Helper.getMd5(current));
-        usernames.put(currentUser.getUsername(), currentUser);
-        TextService.writeToFile(path, currentUser.toString());
+        UsersData.usernames.put(currentUser.getUsername(), currentUser);
+        TextService.writeToFile(UsersData.path, currentUser.toString());
+
     }
 
-    private void login() {
+    private boolean login() {
+        System.out.println("Anytime you can write exit");
         System.out.println("Write username");
         String username = Helper.scanner.next();
-        while (!usernames.containsKey(username)) {
+        while (!UsersData.usernames.containsKey(username)) {
+            if (username.equalsIgnoreCase("exit")) return false;
             System.out.println("Username doesn't exist");
             username = Helper.scanner.next();
         }
-        currentUser = usernames.get(username);
+        currentUser = UsersData.usernames.get(username);
         System.out.println("Write your password");
         String pass = Helper.scanner.next();
         while (!(Helper.getMd5(pass).equals(currentUser.getPassword()))) {
+            if (username.equalsIgnoreCase("exit")) return false;
             System.out.println("Password is wrong.Please write again!");
             pass = Helper.scanner.next();
         }
-
+        return true;
     }
 }

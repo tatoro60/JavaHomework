@@ -1,38 +1,31 @@
 package Homework.Homework7.model;
 
-import Homework.Homework7.data.FootballersData;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Objects;
 
-public class User {
+public class User implements Comparable<User>{
     private String name;
     private String surname;
     private String username;
     private String email;
     private String password;
-    private int sumOfFantasyScore;
-    private static final String ADMIN_PATH = FootballersData.footballersPath;
-    private static HashMap<Integer, Footballer> allFootballers = FootballersData.allFootballers;
+    private int sumOfFantasyScore = 0;
     private String userPath;
+    public LinkedHashMap<Integer,Footballer> myTeam = new LinkedHashMap<>();
 
-    public User(String username){
-        this.username = username;
-    }
-
-    public User(){
+    public User() {
 
     }
 
-    public User(String name, String surname, String username, String email, String password) {
+    public User(String name, String surname, String username, String email, String password,String userPath) {
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.userPath = userPath;
     }
 
     public String getName() {
@@ -75,38 +68,26 @@ public class User {
         this.password = password;
     }
 
-    private boolean setNickName(String nickName) {
-        String USERNAME_PATTERN = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$";
-        if (nickName.matches(USERNAME_PATTERN)) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("C:\\Users\\Admin\\Desktop\\Users\\");
-            sb.append(nickName);
-            sb.append(".txt");
-            File file = new File(sb.toString());
-            if (file.exists()) {
-                System.out.println("Nickname already exists");
-                return false;
-            }
-            this.username = nickName;
-            userPath = sb.toString();
-            return true;
-        } else {
-            System.out.println("Your nickname is invalid! Please type correct nickname");
-            return false;
-        }
+    public int getSumOfFantasyScore() {
+        return sumOfFantasyScore;
     }
 
-
-    public void chooseFootballers() throws IOException {
-        if(allFootballers.isEmpty()){
-            FootballersData.readDataFromFile();
-        }
+    public void addFantasyScore(int sumOfFantasyScore) {
+        this.sumOfFantasyScore += sumOfFantasyScore;
     }
 
-    public void footballersList(List<String> list) {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
+    public String getUserPath() {
+        return userPath;
+    }
+    public String makeLink() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        sb.append("C:\\Users\\Admin\\Desktop\\Users\\");
+        sb.append(getUsername());
+        sb.append(".txt");
+        File file = new File(sb.toString());
+        file.createNewFile();
+        userPath = sb.toString();
+        return sb.toString();
     }
 
     @Override
@@ -116,8 +97,9 @@ public class User {
         sb.append(getSurname()).append(" ");
         sb.append(getUsername()).append(" ");
         sb.append(getEmail()).append(" ");
-        sb.append(getPassword());
-        return  sb.toString();
+        sb.append(getPassword()).append(" ");
+        sb.append(getUserPath());
+        return sb.toString();
     }
 
     @Override
@@ -131,5 +113,10 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(username);
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return this.sumOfFantasyScore-o.sumOfFantasyScore;
     }
 }

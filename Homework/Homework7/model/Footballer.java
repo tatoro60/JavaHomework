@@ -5,11 +5,11 @@ import Homework.Homework7.service.ValidationService;
 import java.util.StringJoiner;
 
 public class Footballer implements Comparable<Footballer> {
-    public String firstName;
-    public String lastName;
-    public String position;
-    public int fantasyScore;
-    public int ID;
+    private String firstName;
+    private String lastName;
+    private String position;
+    private int fantasyScore;
+    private int ID;
 
     public Footballer(int ID,String position,String firstName,String lastName,int fantasyScore){
         this.ID = ID;
@@ -80,6 +80,14 @@ public class Footballer implements Comparable<Footballer> {
         stringJoiner.add(this.firstName);
         stringJoiner.add(this.lastName);
         stringJoiner.add(this.fantasyScore+"");
+        return stringJoiner.toString();
+    }
+    public String toStringForUsers(){
+        StringJoiner stringJoiner = new StringJoiner(" ");
+        stringJoiner.add(this.ID+"");
+        stringJoiner.add(this.position);
+        stringJoiner.add(this.firstName);
+        stringJoiner.add(this.lastName);
         return stringJoiner.toString();
     }
 }

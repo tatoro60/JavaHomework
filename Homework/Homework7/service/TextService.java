@@ -1,5 +1,6 @@
 package Homework.Homework7.service;
 
+import Homework.Homework7.data.UsersData;
 import Homework.Homework7.model.User;
 
 import java.io.IOException;
@@ -15,7 +16,8 @@ public class TextService {
         List<String> strings = Files.readAllLines(Path.of(path));
         for (String string : strings) {
             String[] info = string.split(" ");
-            User currentUser = new User(info[0],info[1],info[2],info[3],info[4]);
+            User currentUser = new User(info[0],info[1],info[2],info[3],info[4],info[5]);
+            UsersData.readCurrentUserInfoFromFile(currentUser.getUserPath(),currentUser);
             map.put(currentUser.getUsername(),currentUser);
         }
     }

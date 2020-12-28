@@ -1,9 +1,9 @@
 package Homework.Homework7.enums;
 
-public enum Command {
+public enum AccessCommands {
     LOGIN("login"),SIGNUP("signup"),EXIT("exit");
     private String command;
-    Command(String cmd){
+    AccessCommands(String cmd){
         this.command = cmd;
     }
 
@@ -14,8 +14,8 @@ public enum Command {
     public void setCommand(String command) {
         this.command = command;
     }
-    public static Command fromString(String orderName) {
-        for (Command cmd : Command.values()) {
+    public static AccessCommands fromString(String orderName) {
+        for (AccessCommands cmd : AccessCommands.values()) {
             if (cmd.getCommand().equalsIgnoreCase(orderName)) {
                 return cmd;
             }
