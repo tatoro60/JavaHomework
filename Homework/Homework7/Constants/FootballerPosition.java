@@ -1,13 +1,13 @@
-package Homework.Homework7.enums;
+package Homework.Homework7.Constants;
 
-public enum FOOTBALLERS_Position {
+public enum FootballerPosition {
     GOALKEEPER("GK"),
     DEFENDER("DF"),
     MIDFIELDER("MF"),
     FORWARD("FW");
     private String pos;
 
-    FOOTBALLERS_Position(String pos) {
+    FootballerPosition(String pos) {
         this.pos = pos;
     }
 
@@ -19,8 +19,8 @@ public enum FOOTBALLERS_Position {
         this.pos = pos;
     }
 
-    public static FOOTBALLERS_Position fromString(String positionName) {
-        for (FOOTBALLERS_Position position : FOOTBALLERS_Position.values()) {
+    public static FootballerPosition fromString(String positionName) {
+        for (FootballerPosition position : FootballerPosition.values()) {
             if (position.getPosition().equalsIgnoreCase(positionName)) {
                 return position;
             }

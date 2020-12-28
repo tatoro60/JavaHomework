@@ -1,7 +1,7 @@
 package Homework.Homework7.service;
 
 import Homework.Homework7.data.FootballersData;
-import Homework.Homework7.enums.FootballerCommands;
+import Homework.Homework7.Constants.FootballerCommands;
 import Homework.Homework7.model.Admin;
 import Homework.Homework7.model.Footballer;
 import Homework.Homework7.model.User;

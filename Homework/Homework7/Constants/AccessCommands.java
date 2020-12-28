@@ -1,4 +1,4 @@
-package Homework.Homework7.enums;
+package Homework.Homework7.Constants;
 
 public enum AccessCommands {
     LOGIN("login"),SIGNUP("signup"),EXIT("exit");

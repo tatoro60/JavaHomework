@@ -1,10 +1,9 @@
-package Homework.Homework7.enums;
+package Homework.Homework7.Constants;
 
-public enum FootballerCommands {
-    ADD("add"), REMOVE("remove"),SHOWALL("showall"),EXIT("exit"),SHOWMY("showmy");
+public enum GeneralCommands {
+    FOOT("foot"), USER("user"),EXIT("exit");
     private String command;
-
-    FootballerCommands(String cmd) {
+    GeneralCommands(String cmd){
         this.command = cmd;
     }
 
@@ -15,9 +14,8 @@ public enum FootballerCommands {
     public void setCommand(String command) {
         this.command = command;
     }
-
-    public static FootballerCommands fromString(String orderName) {
-        for (FootballerCommands cmd : FootballerCommands.values()) {
+    public static GeneralCommands fromString(String orderName) {
+        for (GeneralCommands cmd : GeneralCommands.values()) {
             if (cmd.getCommand().equalsIgnoreCase(orderName)) {
                 return cmd;
             }

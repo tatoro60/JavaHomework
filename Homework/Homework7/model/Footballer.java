@@ -28,7 +28,7 @@ public class Footballer implements Comparable<Footballer> {
 
     public void setFirstName(String firstName) {
 
-        if (ValidationService.nameValidator(firstName)) {
+        if (ValidationService.validateName(firstName)) {
             this.firstName = firstName;
         }
     }
@@ -38,7 +38,7 @@ public class Footballer implements Comparable<Footballer> {
     }
 
     public void setLastName(String lastName) {
-        if (ValidationService.nameValidator(lastName)) {
+        if (ValidationService.validateName(lastName)) {
             this.lastName = lastName;
         }
     }

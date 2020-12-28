@@ -1,13 +1,9 @@
-package Homework.Homework7.log;
+package Homework.Homework7.service;
 
 import Homework.Homework7.data.FootballersData;
 import Homework.Homework7.data.UsersData;
-import Homework.Homework7.enums.AccessCommands;
+import Homework.Homework7.Constants.AccessCommands;
 import Homework.Homework7.model.User;
-import Homework.Homework7.service.Helper;
-import Homework.Homework7.service.TextService;
-import Homework.Homework7.service.UserService;
-import Homework.Homework7.service.ValidationService;
 
 import java.io.IOException;
 
@@ -47,21 +43,21 @@ public class AccessAsUser {
         String current;
         System.out.println("Please write your name");
         current = Helper.scanner.next();
-        while (!ValidationService.nameValidator(current)) {
+        while (!ValidationService.validateName(current)) {
             System.out.println("Your name is not valid please write again!");
             current = Helper.scanner.next();
         }
         currentUser.setName(current);
         System.out.println("Please write your surname");
         current = Helper.scanner.next();
-        while (!ValidationService.nameValidator(current)) {
+        while (!ValidationService.validateName(current)) {
             System.out.println("Your surname is not valid please write again!");
             current = Helper.scanner.next();
         }
         currentUser.setSurname(current);
         System.out.println("Please write your username");
         current = Helper.scanner.next();
-        while (!ValidationService.usernameValidator(current, UsersData.usernames)) {
+        while (!ValidationService.validateUsername(current, UsersData.usernames)) {
             if (current.length() <= 10) {
                 System.out.println("Username length must be longer than 10");
             } else {
@@ -73,14 +69,14 @@ public class AccessAsUser {
         currentUser.makeLink();
         System.out.println("Please write your email");
         current = Helper.scanner.next();
-        while (!ValidationService.emailValidator(current)) {
+        while (!ValidationService.validateEmail(current)) {
             System.out.println("Email validation is wrong .Write right email");
             current = Helper.scanner.next();
         }
         currentUser.setEmail(current);
         System.out.println("Please write your password");
         current = Helper.scanner.next();
-        while (!(ValidationService.passwordValidator(current) && current.length() > 8)) {
+        while (!(ValidationService.validatePassword(current) && current.length() > 8)) {
             if (current.length() <= 8) {
                 System.out.println("Your password length must be longer than 8");
             } else {

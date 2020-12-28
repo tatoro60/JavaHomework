@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class FootballersData {
-    public static final String footballersPath = "C:\\Users\\Admin\\Desktop\\FootInfo.txt";
+    public static final String footballersPath = "C:\\Users\\Admin\\Desktop\\Javafolder\\JavaHomework\\Homework\\Homework7\\data\\FootInfo.txt";
     public static HashMap<Integer,Footballer> allFootballers = new HashMap<>();
 
     public static void readDataFromFile() throws IOException {

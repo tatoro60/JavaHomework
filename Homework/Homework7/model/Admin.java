@@ -2,9 +2,9 @@ package Homework.Homework7.model;
 
 import Homework.Homework7.data.FootballersData;
 import Homework.Homework7.data.UsersData;
-import Homework.Homework7.enums.FootballerCommands;
-import Homework.Homework7.enums.FOOTBALLERS_Position;
-import Homework.Homework7.enums.GeneralCommands;
+import Homework.Homework7.Constants.FootballerCommands;
+import Homework.Homework7.Constants.FootballerPosition;
+import Homework.Homework7.Constants.GeneralCommands;
 import Homework.Homework7.service.Helper;
 import Homework.Homework7.service.TextService;
 import Homework.Homework7.service.ValidationService;
@@ -128,7 +128,7 @@ public class Admin {
     private void addNewFootballer() {
         System.out.println("Enter footballer position");
         System.out.println("GK      DF      MF      FW");
-        FOOTBALLERS_Position position = FOOTBALLERS_Position.fromString(Helper.scanner.next());
+        FootballerPosition position = FootballerPosition.fromString(Helper.scanner.next());
         if (position == null) {
             System.out.println("Position is wrong");
             return;
@@ -138,14 +138,14 @@ public class Admin {
         String currentName;
         System.out.println("Enter footballers firstname");
         currentName = Helper.scanner.next();
-        while (!ValidationService.nameValidator(currentName)) {
+        while (!ValidationService.validateName(currentName)) {
             System.out.println("Footballer's firstname is not valid please write again!");
             currentName = Helper.scanner.next();
         }
         current.setFirstName(currentName);
         System.out.println("Enter footballers lastname");
         currentName = Helper.scanner.next();
-        while (!ValidationService.nameValidator(currentName)) {
+        while (!ValidationService.validateName(currentName)) {
             System.out.println("Footballer's lastname is not valid please write again!");
             currentName = Helper.scanner.next();
         }

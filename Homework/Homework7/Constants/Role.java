@@ -1,12 +1,12 @@
-package Homework.Homework7.enums;
+package Homework.Homework7.Constants;
 
-public enum ROLE {
+public enum Role {
     USER("user"),
     ADMIN("admin"),
     END("end");
     private String role;
 
-    ROLE(String pos) {
+    Role(String pos) {
         this.role = pos;
     }
 
@@ -18,8 +18,8 @@ public enum ROLE {
         this.role = pos;
     }
 
-    public static ROLE fromString(String role) {
-        for (ROLE rol : ROLE.values()) {
+    public static Role fromString(String role) {
+        for (Role rol : Role.values()) {
             if (rol.getRole().equalsIgnoreCase(role)) {
                 return rol;
             }

@@ -81,7 +81,7 @@ public class User implements Comparable<User>{
     }
     public String makeLink() throws IOException {
         StringBuilder sb = new StringBuilder();
-        sb.append("C:\\Users\\Admin\\Desktop\\Users\\");
+        sb.append("C:\\Users\\Admin\\Desktop\\Javafolder\\JavaHomework\\Homework\\Homework7\\data\\Users\\");
         sb.append(getUsername());
         sb.append(".txt");
         File file = new File(sb.toString());

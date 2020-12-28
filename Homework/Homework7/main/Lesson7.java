@@ -2,9 +2,9 @@ package Homework.Homework7.main;
 
 import Homework.Homework7.data.FootballersData;
 import Homework.Homework7.data.UsersData;
-import Homework.Homework7.enums.ROLE;
-import Homework.Homework7.log.AccessAsUser;
+import Homework.Homework7.Constants.Role;
 import Homework.Homework7.model.Admin;
+import Homework.Homework7.service.AccessAsUser;
 import Homework.Homework7.service.Helper;
 import Homework.Homework7.service.TextService;
 
@@ -21,7 +21,7 @@ public class Lesson7 {
         while (true) {
             System.out.println("Type your command");
             System.out.println("ADMIN   USER   END");
-            ROLE role = ROLE.fromString(Helper.scanner.next());
+            Role role = Role.fromString(Helper.scanner.next());
             if (role != null) {
                 switch (role) {
                     case ADMIN:
