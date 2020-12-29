@@ -14,7 +14,9 @@ import java.io.IOException;
 public class Lesson7 {
     public static void main(String[] args) {
         try {
+            //read all data
             TextService.fillUsernamesMap(UsersData.usernames, UsersData.path);
+            FootballersData.readDataFromFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,7 +41,7 @@ public class Lesson7 {
                         }
                         break;
                     case END:
-                        if (Admin.usersAccessToSeeScores) {
+                        if (Admin.matchDayWasEnded) {//Cleared all data if match day finished
                             File file;
                             for (String username : UsersData.usernames.keySet()) {
                                 file = new File(UsersData.usernames.get(username).getUserPath());

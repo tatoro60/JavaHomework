@@ -33,7 +33,7 @@ public class AccessAsUser {
                         return;
                 }
                 FootballersData.readDataFromFile();
-                new UserService(currentUser).workWithUser();
+                new UserService(currentUser).begin();
             }
         }
     }
@@ -103,7 +103,7 @@ public class AccessAsUser {
         System.out.println("Write your password");
         String pass = Helper.scanner.next();
         while (!(Helper.getMd5(pass).equals(currentUser.getPassword()))) {
-            if (username.equalsIgnoreCase("exit")) return false;
+            if (pass.equalsIgnoreCase("exit")) return false;
             System.out.println("Password is wrong.Please write again!");
             pass = Helper.scanner.next();
         }

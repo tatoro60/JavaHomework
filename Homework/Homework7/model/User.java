@@ -79,7 +79,8 @@ public class User implements Comparable<User>{
     public String getUserPath() {
         return userPath;
     }
-    public String makeLink() throws IOException {
+
+    public void makeLink() throws IOException {
         StringBuilder sb = new StringBuilder();
         sb.append("C:\\Users\\Admin\\Desktop\\Javafolder\\JavaHomework\\Homework\\Homework7\\data\\Users\\");
         sb.append(getUsername());
@@ -87,7 +88,6 @@ public class User implements Comparable<User>{
         File file = new File(sb.toString());
         file.createNewFile();
         userPath = sb.toString();
-        return sb.toString();
     }
 
     @Override

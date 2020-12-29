@@ -10,16 +10,16 @@ import Homework.Homework7.service.TextService;
 import Homework.Homework7.service.ValidationService;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Admin {
-    public static boolean usersAccessToSeeScores;
+    public static boolean matchDayWasEnded;
+    private final LinkedHashMap<Integer,Footballer> curr =new LinkedHashMap<>();
+
     public void begin() throws IOException {
-        System.out.println("Do you want end tour ? YES/NO");
-        if(Helper.scanner.next().equalsIgnoreCase("yes")){
-            usersAccessToSeeScores = true;
+        System.out.println("Do you want to end match day ? YES/NO");
+        if (Helper.scanner.next().equalsIgnoreCase("yes")) {
+            matchDayWasEnded = true;
         }
         boolean pointer = true;
         while (pointer) {
@@ -55,7 +55,7 @@ public class Admin {
             System.out.println("Write user's username to see team");
             System.out.println("Or type exit");
             String username = Helper.scanner.next();
-            if(username.equalsIgnoreCase("exit")){
+            if (username.equalsIgnoreCase("exit")) {
                 return;
             }
             while (!UsersData.usernames.containsKey(username)) {
@@ -72,16 +72,16 @@ public class Admin {
         }
     }
 
-    private void editFootballers() throws IOException {
-        if(usersAccessToSeeScores){
-            System.out.println("You can not edit footballers ,because tour is ended");
+    private void editFootballers(){
+        if (matchDayWasEnded) {
+            System.out.println("You can not edit footballers ,because match day finished");
             seeUsers();
             return;
         }
         boolean pointer = true;
         while (pointer) {
             System.out.println("Enter your command");
-            System.out.println("ADD REMOVE SHOWALL EXIT");
+            System.out.println("ADD REMOVE SHOWALL SHOWMY EXIT");
             FootballerCommands command = FootballerCommands.fromString(Helper.scanner.next());
             if (command != null) {
                 switch (command) {
@@ -92,7 +92,10 @@ public class Admin {
                         remove();
                         break;
                     case SHOWALL:
-                        showAllFootballers();
+                        showFootballers(FootballersData.allFootballers);
+                        break;
+                    case SHOWMY://see current footballers that will be added
+                        showFootballers(curr);
                         break;
                     case EXIT:
                         saveInfoInFile();
@@ -104,25 +107,16 @@ public class Admin {
         }
     }
 
-    private void showAllFootballers() {
-        for (Footballer footballer : FootballersData.allFootballers.values()) {
+    private void showFootballers(Map<Integer,Footballer> map) {
+        for (Footballer footballer : map.values()) {
             System.out.println(footballer);
         }
     }
 
     private void remove() {
-        if(!UsersData.usernames.isEmpty()){
-            System.out.println("You can not remove");
-            return;
-        }
-        System.out.println("Do you want see footballers list?");
-        System.out.println("Type YES if you want");
-        if (Helper.scanner.next().equalsIgnoreCase("YES")) {
-            showAllFootballers();
-        }
-
+        showFootballers(curr);
         System.out.println("Enter footballer's ID");
-        FootballersData.allFootballers.remove(Helper.scanner.nextInt());
+        curr.remove(Helper.scanner.nextInt());
     }
 
     private void addNewFootballer() {
@@ -150,27 +144,22 @@ public class Admin {
             currentName = Helper.scanner.next();
         }
         current.setLastName(currentName);
-        int score;
         System.out.println("Enter fantasy score");
-        score = Helper.scanner.nextInt();
-        while (score < 0) {
-            System.out.println("Fantasy score  must be non negative");
-            score = Helper.scanner.nextInt();
-        }
-        current.setFantasyScore(score);
+        current.setFantasyScore(Helper.scanner.nextInt());
         current.setID(current.hashCode());
-        FootballersData.allFootballers.put(current.getID(), current);
+        curr.put(current.getID(), current);
     }
 
-    private void saveInfoInFile() throws IOException {
-        TextService.removeFileInfo(FootballersData.footballersPath);
-        for (Footballer x : FootballersData.allFootballers.values()) {
+    private void saveInfoInFile(){
+        FootballersData.allFootballers.putAll(curr);
+        for (Footballer x : curr.values()) {
             try {
                 TextService.writeToFile(FootballersData.footballersPath, x.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        curr.clear();
     }
 
 

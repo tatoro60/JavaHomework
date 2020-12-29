@@ -16,8 +16,8 @@ public class UserService {
         this.current = user;
     }
 
-    public void workWithUser() {
-        if (Admin.usersAccessToSeeScores) {// if tour was ended you can not edit team
+    public void begin() {
+        if (Admin.matchDayWasEnded) {// if match day finished you can not edit team
             Admin.seeUsers();
             return;
         }
