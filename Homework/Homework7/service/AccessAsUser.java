@@ -5,6 +5,7 @@ import Homework.Homework7.data.UsersData;
 import Homework.Homework7.Constants.AccessCommands;
 import Homework.Homework7.model.User;
 
+import java.io.File;
 import java.io.IOException;
 
 public class AccessAsUser {

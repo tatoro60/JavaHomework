@@ -2,7 +2,6 @@ package Homework.Homework7.service;
 
 import Homework.Homework7.data.FootballersData;
 import Homework.Homework7.Constants.FootballerCommands;
-import Homework.Homework7.model.Admin;
 import Homework.Homework7.model.Footballer;
 import Homework.Homework7.model.User;
 
@@ -17,8 +16,8 @@ public class UserService {
     }
 
     public void begin() {
-        if (Admin.matchDayWasEnded) {// if match day finished you can not edit team
-            Admin.seeUsers();
+        if (AdminService.matchDayWasEnded) {// if match day finished you can not edit team
+            AdminService.seeUsers();
             return;
         }
         while (true) {

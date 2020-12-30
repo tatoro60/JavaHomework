@@ -1,10 +1,12 @@
-package Homework.Homework7.model;
+package Homework.Homework7.service;
 
 import Homework.Homework7.data.FootballersData;
 import Homework.Homework7.data.UsersData;
 import Homework.Homework7.Constants.FootballerCommands;
 import Homework.Homework7.Constants.FootballerPosition;
 import Homework.Homework7.Constants.GeneralCommands;
+import Homework.Homework7.model.Footballer;
+import Homework.Homework7.model.User;
 import Homework.Homework7.service.Helper;
 import Homework.Homework7.service.TextService;
 import Homework.Homework7.service.ValidationService;
@@ -12,9 +14,9 @@ import Homework.Homework7.service.ValidationService;
 import java.io.IOException;
 import java.util.*;
 
-public class Admin {
+public class AdminService {
     public static boolean matchDayWasEnded;
-    private final LinkedHashMap<Integer,Footballer> curr =new LinkedHashMap<>();
+    private final LinkedHashMap<Integer, Footballer> curr =new LinkedHashMap<>();
 
     public void begin() throws IOException {
         System.out.println("Do you want to end match day ? YES/NO");
@@ -146,7 +148,7 @@ public class Admin {
         current.setLastName(currentName);
         System.out.println("Enter fantasy score");
         current.setFantasyScore(Helper.scanner.nextInt());
-        current.setID(current.hashCode());
+        current.setID(FootballersData.getLastID());
         curr.put(current.getID(), current);
     }
 

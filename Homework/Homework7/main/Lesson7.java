@@ -3,7 +3,7 @@ package Homework.Homework7.main;
 import Homework.Homework7.data.FootballersData;
 import Homework.Homework7.data.UsersData;
 import Homework.Homework7.Constants.Role;
-import Homework.Homework7.model.Admin;
+import Homework.Homework7.service.AdminService;
 import Homework.Homework7.service.AccessAsUser;
 import Homework.Homework7.service.Helper;
 import Homework.Homework7.service.TextService;
@@ -28,7 +28,7 @@ public class Lesson7 {
                 switch (role) {
                     case ADMIN:
                         try {
-                            new Admin().begin();
+                            new AdminService().begin();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -41,7 +41,7 @@ public class Lesson7 {
                         }
                         break;
                     case END:
-                        if (Admin.matchDayWasEnded) {//Cleared all data if match day finished
+                        if (AdminService.matchDayWasEnded) {//Cleared all data if match day finished
                             File file;
                             for (String username : UsersData.usernames.keySet()) {
                                 file = new File(UsersData.usernames.get(username).getUserPath());

@@ -1,5 +1,6 @@
 package Homework.Homework7.model;
 
+import Homework.Homework7.data.FootballersData;
 import Homework.Homework7.service.ValidationService;
 
 import java.util.StringJoiner;
@@ -20,6 +21,7 @@ public class Footballer implements Comparable<Footballer> {
     }
 
     public Footballer() {
+        FootballersData.incrementLastId();
     }
 
     public String getFirstName() {
